@@ -2574,7 +2574,6 @@ class HashHistory extends History {
     if (fallback && checkFallback(this.base)) {
       return
     }
-    ensureSlash();
   }
 
   // this is delayed until the app mounts
@@ -2594,9 +2593,6 @@ class HashHistory extends History {
 
     const handleRoutingEvent = () => {
       const current = this.current;
-      if (!ensureSlash()) {
-        return
-      }
       this.transitionTo(getHash(), route => {
         if (supportsScroll) {
           handleScroll(this.router, route, current, true);
@@ -2664,15 +2660,6 @@ function checkFallback (base) {
     window.location.replace(cleanPath(base + '/#' + location));
     return true
   }
-}
-
-function ensureSlash () {
-  const path = getHash();
-  if (path.charAt(0) === '/') {
-    return true
-  }
-  replaceHash('/' + path);
-  return false
 }
 
 function getHash () {

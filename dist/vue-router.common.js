@@ -2593,7 +2593,6 @@ var HashHistory = /*@__PURE__*/(function (History) {
     if (fallback && checkFallback(this.base)) {
       return
     }
-    ensureSlash();
   }
 
   if ( History ) HashHistory.__proto__ = History;
@@ -2619,9 +2618,6 @@ var HashHistory = /*@__PURE__*/(function (History) {
 
     var handleRoutingEvent = function () {
       var current = this$1.current;
-      if (!ensureSlash()) {
-        return
-      }
       this$1.transitionTo(getHash(), function (route) {
         if (supportsScroll) {
           handleScroll(this$1.router, route, current, true);
@@ -2697,15 +2693,6 @@ function checkFallback (base) {
     window.location.replace(cleanPath(base + '/#' + location));
     return true
   }
-}
-
-function ensureSlash () {
-  var path = getHash();
-  if (path.charAt(0) === '/') {
-    return true
-  }
-  replaceHash('/' + path);
-  return false
 }
 
 function getHash () {
