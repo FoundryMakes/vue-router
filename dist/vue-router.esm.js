@@ -1026,10 +1026,7 @@ function normalizeLocation (
   }
 
   var parsedPath = parsePath(next.path || '');
-  var basePath = (current && current.path) || '/';
-  var path = parsedPath.path
-    ? resolvePath(parsedPath.path, basePath, append || next.append)
-    : basePath;
+  var path = parsedPath.path;
 
   var query = resolveQuery(
     parsedPath.query,
